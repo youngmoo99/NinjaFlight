@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using UnityEditor.Build.Content;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -11,8 +12,8 @@ public class Player : MonoBehaviour
 
     //무기 게임 오브젝트 생성
     [SerializeField]
-    private GameObject weapon;
-    //private int weaponIndex = 0;
+    private GameObject[] weapons;
+    private int weaponIndex = 0;
 
     [SerializeField]
     private Transform shootTransform;
@@ -36,15 +37,35 @@ public class Player : MonoBehaviour
             transform.position += moveTo;
         }
 
-        Shoot();
-
+        if(GameManager.instance.isGameOver == false) {
+            Shoot();
+        }
     }
     void Shoot() {
         if (Time.time - lastShotTime > shootInterval) { // Time.time : 게임이 시작된 이후로 현재까지 흐른시간
             //Instantiate(어떤객체를, 어떤위치에, 회전을 어떻게해서);
             //Instantiate(weapons[weaponIndex], shootTransform.position, quaternion.identity);
-            Instantiate(weapon, shootTransform.position, quaternion.identity);
+            Instantiate(weapons[weaponIndex], shootTransform.position, quaternion.identity);
             lastShotTime = Time.time;
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.gameObject.tag == "Enemy" || other.gameObject.tag == "Boss") {
+            GameManager.instance.SetGameOver();
+            Destroy(gameObject);
+        } else if(other.gameObject.tag =="Coin") {
+            GameManager.instance.IncreaseCoin();
+            Destroy(other.gameObject);
+        }
+        
+    }
+
+    public void Upgrade() {
+        weaponIndex++;
+        if (weaponIndex >= weapons.Length) {
+            weaponIndex = weapons.Length -1;
+        }
+
     }
 }

@@ -7,7 +7,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private GameObject[] enemies;
 
+    [SerializeField]
+    private GameObject boss;
     private float[] arrPosX = {-2.2f, -1.1f, 0, 1.1f, 2.2f};
+
     [SerializeField]
     private float spawnInterval = 1.5f;
 
@@ -38,9 +41,15 @@ public class EnemySpawner : MonoBehaviour
                 SpawnEnemy(posX, enemyIndex, moveSpeed);
             }
             spawnCount++;
-            if(spawnCount % 10 == 0) {
+            if(spawnCount % 1 == 0) {
                 enemyIndex++;
-                moveSpeed+=1; 
+                moveSpeed++; 
+            }
+
+            if (enemyIndex >= enemies.Length) {
+                SpawnBoss();
+                enemyIndex = 0;
+                moveSpeed = 5f;
             }
             
 
@@ -63,5 +72,9 @@ public class EnemySpawner : MonoBehaviour
         GameObject enemyObject = Instantiate(enemies[index], spawnPos, Quaternion.identity);
         Enemy enemy = enemyObject.GetComponent<Enemy>();
         enemy.SetMoveSpeed(moveSpeed);
+    }
+
+    void SpawnBoss() {
+        Instantiate(boss,transform.position, Quaternion.identity);
     }
 }
