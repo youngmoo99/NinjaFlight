@@ -41,7 +41,7 @@ public class EnemySpawner : MonoBehaviour
                 SpawnEnemy(posX, enemyIndex, moveSpeed);
             }
             spawnCount++;
-            if(spawnCount % 1 == 0) {
+            if(spawnCount % 3 == 0) {
                 enemyIndex++;
                 moveSpeed++; 
             }

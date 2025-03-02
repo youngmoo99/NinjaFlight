@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -28,6 +29,28 @@ public class GameManager : MonoBehaviour
 
     public void IncreaseCoin() {
         coin++;
+        text.SetText(coin.ToString());
+
+        if (coin % 5 == 0) {
+            Player player = FindObjectOfType<Player>();
+            if (player != null) {
+                player.Upgrade();
+            }
+        }
+    }
+    public void IncreaseCoin2() {
+        coin = coin+2;
+        text.SetText(coin.ToString());
+
+        if (coin % 3 == 0) {
+            Player player = FindObjectOfType<Player>();
+            if (player != null) {
+                player.Upgrade();
+            }
+        }
+    }
+    public void IncreaseCoin3() {
+        coin = coin+3;
         text.SetText(coin.ToString());
 
         if (coin % 3 == 0) {

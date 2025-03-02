@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Coin
   - Boss
+  - Coin3
+  - Coin2
   layers:
   - Default
   - TransparentFX

@@ -1516,7 +1516,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 34.0413}
+  m_AnchoredPosition: {x: 0, y: 34.04126}
   m_SizeDelta: {x: 0, y: -1046.768}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1515428728
@@ -1766,6 +1766,7 @@ MonoBehaviour:
   - {fileID: 389524614970327909, guid: 2cc89fda49bae214486d555df6a8721f, type: 3}
   shootTransform: {fileID: 895490751}
   shootInterval: 0.1
+  spreadAngle: 30
 --- !u!50 &1720000833
 Rigidbody2D:
   serializedVersion: 4
